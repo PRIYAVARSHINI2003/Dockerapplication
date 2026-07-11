@@ -13,3 +13,14 @@ module "ec2"{
     security_groups=["module.security_group[*].sgid"]
     subnet_id=module.vpc.subnetid
 }
+module "codebuild"{
+    source="./modules/codebuild"
+}
+
+module "codepipeline"{
+    source="./modules/codebuild"
+}
+
+module "ECR"{
+    source="./modules/ECR"
+}

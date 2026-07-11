@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                credentialsId: 'e3cadab7-25c1-4e61-bd77-2f0efd2a6d9f',
+                credentialsId: 'github_token',
                 url: 'https://github.com/PRIYAVARSHINI2003/Dockerapplication.git'
             }
         }

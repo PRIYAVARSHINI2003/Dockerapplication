@@ -51,6 +51,7 @@ pipeline {
                     else if (params.ACTION == 'destroy') {
                         bat 'terraform destroy -auto-approve'
                     }
+                  }
                 }
                 
             

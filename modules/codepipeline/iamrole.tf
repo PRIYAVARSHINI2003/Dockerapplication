@@ -4,7 +4,11 @@ resource "aws_iam_role" "codepipeline_role"{
         Version = "2012-10-17"
         Statement = [
             {
-                Action = "sts:AssumeRole"
+                 Action = [
+          "codebuild:StartBuild",
+          "codebuild:BatchGetBuilds"
+        ]
+        Resource = var.project_arn
                 Effect = "Allow"
                 Principal = {
                     Service = "codepipeline.amazonaws.com"

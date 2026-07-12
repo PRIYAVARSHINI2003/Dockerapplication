@@ -28,6 +28,7 @@ module "codepipeline"{
     source="./modules/codepipeline"
     project_name = module.codebuild.project_name
     github_token           = var.github_token
+    project_arn = module.codebuild.project_arn
 }
 
 module "ECR"{

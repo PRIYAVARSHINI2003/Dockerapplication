@@ -20,12 +20,7 @@ resource "aws_iam_role" "codebuild_role" {
 
 
 # Allows CodeBuild to push/pull Docker images from ECR
-resource "aws_iam_role_policy_attachment" "codebuild_ecr" {
 
-  role = aws_iam_role.codebuild_role.name
-
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
-}
 
 
 # Allows CodeBuild to write build logs to CloudWatch

@@ -47,5 +47,5 @@ resource "aws_codepipeline" "pipeline" {
 }
 
 resource "aws_s3_bucket" "artifacts"{
-    bucket="docker-artifacts"
+    bucket="docker-artifacts-437952802943"
 }

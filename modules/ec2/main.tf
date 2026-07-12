@@ -7,8 +7,9 @@ resource "aws_instance" "this" {
   instance_type   = "t2.micro"
   subnet_id       = var.subnet_id
   ami              = data.aws_ami.this.id
+  iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
   user_data=<<-EOF
-  #!bin/bash
+  #!/bin/bash
   yum update -y
   yum install httpd -y
   systemctl start httpd
@@ -48,3 +49,31 @@ docker run -d \
   EOF
 }
 
+resource "aws_iam_role" "ec2_role" {
+  name = "ec2-ecr-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+
+resource "aws_iam_role_policy_attachment" "ecr_read" {
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
+
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "ec2-profile"
+  role = aws_iam_role.ec2_role.name
+}

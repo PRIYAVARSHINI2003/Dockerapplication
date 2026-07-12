@@ -6,7 +6,7 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = var.security_groups
   instance_type   = "t2.micro"
   subnet_id       = var.subnet_id
-  ami              = data.aws_ami.this.id
+  ami           = "ami-01edba92f9036f76e"
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
   user_data=<<-EOF
   #!/bin/bash

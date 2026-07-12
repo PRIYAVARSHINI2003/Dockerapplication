@@ -4,7 +4,7 @@ resource "aws_instance" "this" {
 
 
   vpc_security_group_ids = var.security_groups
-  instance_type   = "t2.micro"
+  instance_type   = "t3.micro"
   subnet_id       = var.subnet_id
   ami           = "ami-01edba92f9036f76e"
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name

@@ -20,7 +20,7 @@ resource "aws_codepipeline" "pipeline" {
 
       configuration = {
         Owner  = "PRIYAVARSHINI2003"
-        Repo   = "Dockerapplication"
+        Repo   = "Spingwebapplication"
         Branch = "main"
         OAuthToken = var.github_token
       }
@@ -40,7 +40,7 @@ resource "aws_codepipeline" "pipeline" {
       output_artifacts = ["build_output"]
 
       configuration = {
-        ProjectName = aws_codebuild_project.build.name
+        ProjectName = var.project_name
       }
     }
   }

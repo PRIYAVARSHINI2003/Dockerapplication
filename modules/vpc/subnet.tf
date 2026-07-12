@@ -32,11 +32,18 @@ resource "aws_route_table_association" "publicassoc"{
 
 }
 
-resource "aws_nat_gateway" "this" {
-  vpc_id     = aws_vpc.this.id
-  subnet_id = aws_subnet.privatethis.id
+resource "aws_eip" "nat" {
+  domain = "vpc"
+
+  depends_on = [aws_internet_gateway.igw]
 }
 
+resource "aws_nat_gateway" "this" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.publicthis.id
+
+  depends_on = [aws_internet_gateway.igw]
+}
 
 resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.this.id
